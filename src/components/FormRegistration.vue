@@ -2,17 +2,28 @@
 import LabeledInput from "@/components/LabeledInput.vue";
 import MultiSelect from "@/components/MultiSelect.vue";
 import {required} from "@vuelidate/validators";
-
+import PassportFormSector from "@/components/PassportFormSector.vue";
+import AdressFormSector from "@/components/AdressFormSector.vue";
+import { useVuelidate } from '@vuelidate/core'
 export default {
   name: "FormRegistration",
+  setup: () => ({ v$: useVuelidate() }),
   components: {
+    AdressFormSector,
+    PassportFormSector,
     MultiSelect,
     LabeledInput
   },
   validations: {
-    phoneNumber: {
-      required,
-      valid: value => /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(value), // Валидация по шаблону
+    dataForms:{
+      firstName: required,
+      lastName: required,
+      birthday: required,
+      phoneNumber: {
+        required,
+        valid: value => /^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(value), // Валидация по шаблону
+      },
+      clientGroup:required,
     },
   },
   data() {
@@ -28,22 +39,52 @@ export default {
         doctor: '',
         areNoNeededNotifications: false,
       },
+      address:{
+        index:'',
+        country:'',
+        region:'',
+        town:'',
+        street:'',
+        house:'',
+      },
+      passport:{
+        type:'',
+        series:'',
+        number:'',
+        issuingAuthority:'',
+        dateOfIssue:''
+
+      },
       clientGroupOptions: ['VIP', 'Проблемные', 'ОМС'],
       doctorOptions: ['Иванов', 'Захаров', 'Чернышева'],
+      types:['Паспорт', 'Свидетельство о рождении','Вод. удостоверение']
     }
   },
   methods:{
     formatPhoneNumber() {
       // Удаление всех символов, кроме цифр
-      this.dataForms.phoneNumber = this.dataForms.phoneNumber.replace(/\D/g, '');
-
+      this.dataForms.phoneNumber = this.dataForms.phoneNumber.replace(/\D/g, '')
+      const number = this.dataForms.phoneNumber
       // Добавление +7 и форматирование номера телефона
-      if (this.dataForms.phoneNumber.length >= 1) {
-        this.dataForms.phoneNumber = '+7 (' + this.dataForms.phoneNumber.slice(1, 4) + ') ' + this.dataForms.phoneNumber.slice(4, 7) + '-' + this.dataForms.phoneNumber.slice(7, 9) + '-' + this.dataForms.phoneNumber.slice(9, 11);
+      if (number.length >= 1) {
+        this.dataForms.phoneNumber =
+            '+7 ('
+            + number.slice(1, 4) + ') '
+            + number.slice(4, 7) + '-'
+            + number.slice(7, 9) + '-'
+            + number.slice(9, 11)
       }
     },
+    submitForm() {
+      // Handle form submission logic here
+      if (this.$v.address.$invalid) {
+        console.log('Form is invalid');
+        return;
+      }
+      // Form is valid, proceed with submission
+      console.log('Form submitted!', this.address);
+    }
   }
-
 }
 </script>
 
@@ -53,7 +94,7 @@ export default {
     <LabeledInput label-for="" v-model="dataForms.lastName"/>
     <LabeledInput label-for="" v-model="dataForms.patronymic"/>
     <input type="date" v-model="dataForms.birthday"/>
-    <input type="number" @input="formatPhoneNumber()" v-model="dataForms.phoneNumber"/>
+    <input type="text" @input="formatPhoneNumber()" v-model="dataForms.phoneNumber"/>
     <div>
       Выберите ваш пол:
       <label>
@@ -77,11 +118,9 @@ export default {
       Не отправлять смс
       <input type="checkbox" v-model="dataForms.areNoNeededNotifications">
     </label>
-    <!--
-        <LabeledInput label-for="" v-model="dataForms."/>
-        <LabeledInput label-for="" v-model="dataForms."/>
-    -->
-
+    <AdressFormSector :address="address"/>
+    <PassportFormSector :types="types" :passport="passport"/>
+    <button @click="submitForm" type="submit">Отправить</button>
   </form>
 </template>
 
