@@ -60,7 +60,9 @@ export default {
     },
     addToSelected(value) {
       const uniqueOptions = new Set(this.clientGroupOptionsSelected)
-      if (uniqueOptions.has(value))
+      if (uniqueOptions.has(value)) {
+        return false
+      }
       else {
         this.clientGroupOptionsSelected.push(value)
         this.onUpdate()
