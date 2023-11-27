@@ -1,12 +1,14 @@
 <template>
   <div class="address">
     <h4>Адрес</h4>
-    <LabeledInput label-for="Индекс" v-model="address.index"/>
-    <LabeledInput label-for="Страна" v-model="address.country"/>
-    <LabeledInput label-for="Область" v-model="address.region"/>
-    <LabeledInput label-for="Город" v-model="address.town"/>
-    <LabeledInput label-for="Улица" v-model="address.street"/>
-    <LabeledInput label-for="Дом" v-model="address.house"/>
+    <div class="inputWrapper">
+      <LabeledInput label-for="Индекс" v-model="address.index"/>
+      <LabeledInput label-for="Страна" v-model="address.country"/>
+      <LabeledInput label-for="Область" v-model="address.region"/>
+      <LabeledInput label-for="Город" v-model="address.town"/>
+      <LabeledInput label-for="Улица" v-model="address.street"/>
+      <LabeledInput label-for="Дом" v-model="address.house"/>
+    </div>
   </div>
 </template>
 <script>
@@ -61,19 +63,33 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-$width: 12rem;
 $rounded: 9999px;
-input[type="text"],
-select,
-button {
-  width: calc(100% - 12px); /* Учитываем внутренние отступы */
-  padding: 6px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+$sectorWidth:330px;
+$paddingWidth:calc($sectorWidth/40);
+$formPaddingWidth:calc($paddingWidth*3);
+$formPaddingHeight:calc($sectorWidth/50);
+$columnWidth:calc(($sectorWidth - ($formPaddingHeight + $formPaddingWidth))/2);
+$columnGap:2rem;
+$inputWidth:calc($columnWidth + $columnGap/2  );
+
+input:not(input[type="radio"]),select{
+  width: $inputWidth;
+}
+.address {
+  & > h4{
+    margin-bottom: .5rem;
+  }
+  & > .inputWrapper {
+    display: grid;
+    grid-template-columns: repeat(2, $columnWidth);
+    grid-template-rows:repeat(3, 3.1rem);
+    grid-column-gap: $columnGap;
+    grid-row-gap: calc($columnGap/4);
+    justify-items: left;
+    & > * {
+      margin-bottom: .3rem;
+    }
+  }
 }
 
-.address > * {
-  margin-bottom: .3rem;
-}
 </style>

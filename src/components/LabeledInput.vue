@@ -15,15 +15,18 @@ export default{
 </script>
 
 <template>
-  <label >
-    {{labelFor}}
+  <label>
+    <p>{{labelFor}}</p>
+
     <input type="text" :value="modelValue" @input="updateInput">
   </label>
 </template>
 
 <style scoped lang="scss">
 label{
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: left;
+  color: #737373;
 }
 </style>

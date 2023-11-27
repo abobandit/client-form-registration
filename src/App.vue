@@ -19,7 +19,9 @@ select{
   background: white;
 }
 body{
+  height: 150vh;
   color: #000000;
+  background:center/contain linear-gradient(to top right, #f67a7a 0%, #233ad3 100%) no-repeat  ;
 }
 *{
   font-family: 'Roboto', sans-serif;
@@ -27,6 +29,7 @@ body{
   padding: 0;
   box-sizing: border-box;
 }
+
 </style>
 <script>
 import FormRegistration from "@/components/FormRegistration.vue";
