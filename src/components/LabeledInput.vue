@@ -1,25 +1,29 @@
 <script>
-import InputUI from "@/components/InputUI.vue";
 
 export default{
   name: "LabeledInput",
-  components:{
-    InputUI
+  props: {
+    modelValue: [String, Number],
+    labelFor: [String],
   },
-  props:{
-    modelValue: [String,Number],
-    labelFor:[String]
-  }
+    methods:{
+      updateInput(event) {
+        this.$emit('input', event.target.value)
+      }
+    }
 }
 </script>
 
 <template>
-  <label>
+  <label >
     {{labelFor}}
-    <InputUI v-model="modelValue"/>
+    <input type="text" :value="modelValue" @input="updateInput">
   </label>
 </template>
 
 <style scoped lang="scss">
-
+label{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+}
 </style>
