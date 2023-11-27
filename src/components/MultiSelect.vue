@@ -62,7 +62,6 @@ export default {
       const uniqueOptions = new Set(this.clientGroupOptionsSelected)
       if (uniqueOptions.has(value))
       else {
-        console.log(uniqueOptions)
         this.clientGroupOptionsSelected.push(value)
         this.onUpdate()
       }
@@ -71,12 +70,7 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-$width: 12rem;
 $rounded: 9999px;
-// Стили для мульти-селекта
-.multiselect{
-  //background: #e3dfdf;
-}
 .clientGroupDropdown {
   width: 200px;
   margin: 0 auto 6px;
@@ -86,9 +80,11 @@ $rounded: 9999px;
   position: relative;
   cursor: pointer;
   text-align: left;
-
 }
-
+.multiselect{
+  width: fit-content;
+  margin: auto;
+}
 .clientGroupDropdown .clientGroupOption {
   border-bottom: 1px solid #ccc;
   border-radius: 0 0 4px 4px;
@@ -100,7 +96,6 @@ $rounded: 9999px;
   }
 }
 .chooseGroup{
-
   border-bottom: 1px solid black;
   width:200px;
   display: flex;

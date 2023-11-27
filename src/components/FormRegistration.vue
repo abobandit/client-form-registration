@@ -174,16 +174,16 @@ export default {
 $rounded: 9999px;
 
 form {
+  font-size: .9em;
   width: 400px;
-  height: fit-content;
   font-family: Arial, sans-serif;
-  padding: 20px;
+  padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-
+  height: min-content;
   .dataSector > * {
-    margin-bottom: .3rem;
+    margin-bottom: .2rem;
   }
 }
 
@@ -198,7 +198,7 @@ input[type="date"],
 select,
 button {
   width: calc(100% - 12px); /* Учитываем внутренние отступы */
-  padding: 6px;
+  padding: 4px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -213,7 +213,7 @@ button {
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  padding: .75rem;
   cursor: pointer;
 }
 

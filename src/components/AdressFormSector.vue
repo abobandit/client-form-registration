@@ -49,7 +49,6 @@ export default {
           || !address.country.onlyLetters
           || !address.town.onlyLetters
           || !address.region.onlyLetters) {
-        console.log(address.region.onlyLetters,address.town.onlyLetters,address.country.onlyLetters)
         console.log('адресс заполнен неверно')
         return false
       } else {
@@ -58,23 +57,7 @@ export default {
       }
 
     },
-    /*handleInput(e){
-      console.log(e.target.value)
-    }*/
-  },
-  /*mounted() {
-    // Копируем значения из пропсов во внутренние данные
-    this.localAddress = { ...this.address };
-  },
-  watch: {
-    localAddress: {
-      deep: true,
-      handler(newVal) {
-        // Отправляем измененные данные в родительский компонент через событие
-        this.$emit('updated', newVal);
-      }
-    }
-  }*/
+  }
 }
 </script>
 <style scoped lang="scss">

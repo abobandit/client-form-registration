@@ -44,13 +44,12 @@ export default {
       const passport = this.$v.passport
       if ( passport.$invalid || !passport.number.onlyDigits || !passport.series.onlyDigits ) {
         if (4!==this.passport.series.length){
-          console.log('серия пасспорта должна иметь 4 цифры',this.passport.series.length)
+          console.log('серия пасспорта должна иметь 4 цифры')
         }
         if (6 !==this.passport.number.length){
           console.log('номер пасспорта должен иметь 6 цифры')
         }
         console.log('Паспортные данные заполнены неверно')
-        console.log(passport.dateOfIssue.required)
         return false
       }else{
         console.log('Паспортные данные заполнены верно')
